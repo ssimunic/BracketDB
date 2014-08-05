@@ -1,3 +1,3 @@
-Bracket - JSON database using ORM for PHP prototyping
+Bracket
 =======
-
+JSON database using ORM for PHP prototyping
