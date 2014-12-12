@@ -298,7 +298,9 @@ class BracketDB extends BracketConfig {
 	
 	public static function create($name) {
 		$data = json_encode(array());
-		file_put_contents(dirname(__FILE__).parent::$path.$name.parent::$ext, $data);
+		if(!file_exists(dirname(__FILE__)."/data/".$name.".json")) {
+			file_put_contents(dirname(__FILE__).parent::$path.$name.parent::$ext, $data);
+		}
 	}
 	
 	public static function trash($name) {
