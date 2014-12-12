@@ -1,5 +1,15 @@
 <?php
-
+/**
+ * BracketDB
+ * 
+ * JSON database using ORM for PHP prototyping 
+ *
+ * @author Silvio Simunic
+ * @copyright (c) 2014, Silvio Simunic
+ * @license MIT License
+ * @link https://github.com/ssimunic/Bracket
+ */
+ 
 namespace Bracket; 
 
 abstract class BracketConfig {
