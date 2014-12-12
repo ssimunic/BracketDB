@@ -17,6 +17,7 @@ Make sure you have following structure in your project:
 
     bracketdb/
     bracketdb/data
+    bracketdb/data/.htaccess
     bracketdb/trash
     bracketdb/Bracket.php
 
