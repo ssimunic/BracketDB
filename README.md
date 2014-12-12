@@ -58,6 +58,30 @@ DB::delete('users');
 This will permanently delete ```users.json``` from file system.
 
 ### Methods
+
+| Method  | Info |
+| ------------- | ------------- |
+| all()  | Returns whole table. |
+| get() | Gets the object. |
+| count() | Counts how many rows is in the object. |
+| first() | Gets the first object. |
+| max() | Returns highest column value. |
+| min() | Returns lowest column value. |
+| avg() | Returns average column value. |
+| sum() | Returns sum of all column. |
+| find() | Finds row by ID or specified column. |
+| lists() | Returns all values of specific column. |
+| where() | Condition (column, operator, value). |
+| andWhere() | Same as where(), but used as chain method. |
+| insert() | Inserts data (array) to table. |
+| insertAutoId() | Inserts data (array) with auto-assigned ID to table. |
+| orderBy() |  Orders data ascending or descending. |
+| reorder() | Reorders records by column value and saves it. |
+| structure() | Returns structure of table. |
+| limit() | Sets limit to read methods. |
+| save() | Saves table. |
+| delete() | Deletes row. |
+
 ##### Select all
 ```php
 $table->all();
