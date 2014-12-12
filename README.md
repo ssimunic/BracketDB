@@ -27,7 +27,7 @@ include('bracketdb/Bracket.php');
 ```
 
 ### Database actions
-###### Create table
+##### Create table
 ```php
 DB::create('users'); 
 ```
