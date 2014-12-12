@@ -26,36 +26,32 @@ use Bracket\BracketDB as DB;
 include('bracketdb/Bracket.php');
 ```
 
-Create table
--------
+### Database actions
+###### Create table
 ```php
 DB::create('users'); 
 ```
 This is going to create ```users.json``` in ```bracketdb/data```.
 
-Connect
-------
+##### Connect
 ```php
 $table = DB::table('users'); 
 ```
 From here, you can use ```$table``` as an object and access its methods.
  
-Trash table
--------
+##### Trash table
 ```php
 DB::trash('users'); 
 ```
 Moves ```users.json``` to ```bracketdb/trash```.
  
-Restore table
--------
+##### Restore table
 ```php
 DB::restore('users'); 
 ```
 If ```bracketsdb/trash/users.json``` exists, it will be restored.
 
-Delete table
--------
+##### Delete table
 ```php
 DB::delete('users'); 
 ```
