@@ -57,4 +57,37 @@ DB::delete('users');
 ```
 This will permanently delete ```users.json``` from file system.
 
- 
+### Methods
+##### Select all
+```php
+$table->all();
+```
+Example (display all users with their ID and Name):
+```php
+foreach($table->all() as $user) {
+	echo "<br>ID:".$user->id;
+	echo "<br>Name:".$user->name;
+	echo "<br>";
+}
+```
+
+##### Select & Where
+```php
+$table->where($column, $operator, $value);
+```
+Example:
+```php
+echo $table->where('id', '=',  '1')->first()->id;
+```
+```first()``` is required to get first and only row in this case.
+
+| Operator  | Meaning |
+| ------------- | ------------- |
+| =  | equal(s)  |
+| ==  | equal(s) |
+| != | not equal(s) |
+| <> | different than |
+| < | less than |
+| > | great than |
+| <= | less or equal than |
+| >= | great or equal than |
