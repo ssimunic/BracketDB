@@ -1,6 +1,6 @@
 <?php
 /**
- * BracketDB
+ * Bracket
  * 
  * JSON database using ORM for PHP prototyping 
  *
