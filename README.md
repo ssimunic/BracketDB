@@ -71,7 +71,7 @@ foreach($table->all() as $user) {
 }
 ```
 
-##### Select & Where
+##### Select & Where & andWhere
 ```php
 $table->where($column, $operator, $value);
 ```
@@ -91,3 +91,35 @@ echo $table->where('id', '=',  '1')->first()->id;
 | > | great than |
 | <= | less or equal than |
 | >= | great or equal than |
+
+```addWhere()``` can be added to the end for extra condition. 
+
+##### Order By
+```php
+$table->orderBy($column, $type);
+```
+Example:
+```php
+echo $table->orderBy('name', 'asc')->get()[0]->name;
+```
+```php
+$arr = $table->orderBy('name', 'asc')->get();
+
+foreach($arr as $r) {
+	echo $r->name;
+}
+```
+```asc``` for ascending order, ```desc' for descending.
+
+##### Reorder
+Similiar to orderBy. It reorders all data  and saves it.
+```php
+$table->reorder($column);
+```
+Example:
+```php
+$table->reorder('name');
+```
+
+More comming soon
+-------
