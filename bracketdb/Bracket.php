@@ -1,13 +1,13 @@
 <?php
 /**
- * Bracket
+ * BracketDB
  * 
  * JSON database using ORM for PHP prototyping 
  *
  * @author Silvio Simunic
  * @copyright (c) 2014, Silvio Simunic
  * @license MIT License
- * @link https://github.com/ssimunic/Bracket
+ * @link https://github.com/ssimunic/BracketDB
  */
  
 namespace Bracket; 
