@@ -308,7 +308,7 @@ class BracketDB extends BracketConfig {
 	
 	public static function create($name) {
 		$data = json_encode(array());
-		if(!file_exists(dirname(__FILE__)."/data/".$name.".json")) {
+		if(!file_exists(dirname(__FILE__).$path.$name.".json")) {
 			file_put_contents(dirname(__FILE__).parent::$path.$name.parent::$ext, $data);
 		}
 	}
