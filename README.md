@@ -146,5 +146,5 @@ Example:
 $table->reorder('name');
 ```
 
-More comming soon
+More comming soon!
 -------
