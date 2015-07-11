@@ -197,7 +197,11 @@ class BracketTable extends BracketConfig {
 	}
 	
 	public function insertAutoId($data) {	
-		if(count($data) != count($data, COUNT_RECURSIVE)) {
+		if(count($this->arr)==0) {
+			$idarr = array('id' => 1);
+			$data = array_merge($idarr, $data);
+			array_push($this->arr, $data);
+		} elseif(count($data) != count($data, COUNT_RECURSIVE)) {
 			$max = 0;
 			foreach($this->arr as $row) {
 				if($row->id > $max) {
