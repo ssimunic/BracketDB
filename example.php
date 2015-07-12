@@ -1,12 +1,6 @@
 <?php
 use Bracket\BracketDB as DB;
 include('bracketdb/Bracket.php');
-
-
-$table = DB::table('users');
-$user = DB::table('users')->where('id', '=', '1')->first();
-
-
 ?>
 <html>
 <head>
@@ -15,10 +9,10 @@ $user = DB::table('users')->where('id', '=', '1')->first();
 <body>
 	<table border=1>
 		<tr>
-			<?php foreach($table->structure() as $s) { echo "<th>$s</th>"; } ?>
+			<?php foreach(DB::table('users')->structure() as $s) { echo "<th>$s</th>"; } ?>
 		</tr>
 		<?php
-		foreach($table->get() as $user) {
+		foreach(DB::table('users')->get() as $user) {
 			echo "<tr>";
 			foreach($user as $key => $value) {
 				echo "<td>$value</td>";
