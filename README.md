@@ -36,10 +36,9 @@ This is going to create ```users.json``` in ```bracketdb/data```.
 
 ##### Connect
 ```php
-$table = DB::table('users'); 
+DB::table('users'); 
 ```
-From here, you can use ```$table``` as an object and access its methods.
- 
+
 ##### Trash table
 ```php
 DB::trash('users'); 
@@ -85,11 +84,11 @@ This will permanently delete ```users.json``` from file system.
 
 ##### Select all
 ```php
-$table->all();
+DB::table('users')->all();
 ```
 Example (display all users with their ID and Name):
 ```php
-foreach($table->all() as $user) {
+foreach(DB::table('users')->all() as $user) {
 	echo "<br>ID:".$user->id;
 	echo "<br>Name:".$user->name;
 	echo "<br>";
@@ -98,11 +97,11 @@ foreach($table->all() as $user) {
 
 ##### Select & Where & andWhere
 ```php
-$table->where($column, $operator, $value);
+DB::table('users')->where($column, $operator, $value);
 ```
 Example:
 ```php
-echo $table->where('id', '=',  '1')->first()->id;
+echo DB::table('users')->where('id', '=',  '1')->first()->id;
 ```
 ```first()``` is required to get first and only row in this case.
 
@@ -121,14 +120,14 @@ echo $table->where('id', '=',  '1')->first()->id;
 
 ##### Order By
 ```php
-$table->orderBy($column, $type);
+DB::table('users')->orderBy($column, $type);
 ```
 Example:
 ```php
-echo $table->orderBy('name', 'asc')->get()[0]->name;
+echo DB::table('users')->orderBy('name', 'asc')->get()[0]->name;
 ```
 ```php
-$arr = $table->orderBy('name', 'asc')->get();
+$arr = DB::table('users')->orderBy('name', 'asc')->get();
 
 foreach($arr as $r) {
 	echo $r->name;
@@ -139,11 +138,11 @@ foreach($arr as $r) {
 ##### Reorder
 Similiar to orderBy. It reorders all data  and saves it.
 ```php
-$table->reorder($column);
+DB::table('users')->reorder($column);
 ```
 Example:
 ```php
-$table->reorder('name');
+DB::table('users')->reorder('name');
 ```
 
 More comming soon!
