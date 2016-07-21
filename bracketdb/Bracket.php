@@ -1,16 +1,16 @@
 <?php
 /**
  * BracketDB
- * 
- * JSON database using ORM for PHP prototyping 
+ *
+ * JSON database using ORM for PHP prototyping
  *
  * @author Silvio Simunic
  * @copyright (c) 2014, Silvio Simunic
  * @license MIT License
  * @link https://github.com/ssimunic/BracketDB
  */
- 
-namespace Bracket; 
+
+namespace Bracket;
 
 abstract class BracketConfig {
 	static $path = "/data/";
@@ -23,7 +23,7 @@ class BracketTable extends BracketConfig {
 	private $json;
 	private $arr;
 	private $temp;
-	
+
 	public function __construct($name) {
 		$this->name = $name;
 		$this->fullpath = dirname(__FILE__).parent::$path.$this->name.parent::$ext;
@@ -31,11 +31,11 @@ class BracketTable extends BracketConfig {
 		$this->arr = json_decode($this->json);
 		return $this;
 	}
-	
+
 	public function all() {
 		return $this->arr;
 	}
-	
+
 	public function get() {
 		if(!empty($this->temp)) {
 			return $this->temp;
@@ -43,7 +43,7 @@ class BracketTable extends BracketConfig {
 			return $this->arr;
 		}
 	}
-	
+
 	public function count() {
 		if(!empty($this->temp)) {
 			return count($this->temp);
@@ -51,11 +51,12 @@ class BracketTable extends BracketConfig {
 			return count($this->arr);
 		}
 	}
-	
+
 	public function first() {
-		return $this->temp[0];
+    $this->temp = $this->temp[0];
+		return $this->temp;
 	}
-	
+
 	public function max($column) {
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
 		$i = $temp[0]->$column;
@@ -66,7 +67,7 @@ class BracketTable extends BracketConfig {
 		}
 		return $i;
 	}
-	
+
 	public function min($column) {
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
 		$i = $temp[0]->$column;
@@ -77,7 +78,7 @@ class BracketTable extends BracketConfig {
 		}
 		return $i;
 	}
-	
+
 	public function avg($column) {
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
 		$c = count($temp);
@@ -88,7 +89,7 @@ class BracketTable extends BracketConfig {
 		$avg = $sum/$c;
 		return $avg;
 	}
-	
+
 	public function sum($column) {
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
 		$sum = 0;
@@ -97,7 +98,7 @@ class BracketTable extends BracketConfig {
 		}
 		return $sum;
 	}
-	
+
 	public function find($id, $key="id") {
 		foreach($this->arr as $row) {
 			if($row->$key==$id) {
@@ -105,7 +106,7 @@ class BracketTable extends BracketConfig {
 			}
 		}
 	}
-	
+
 	public function lists($column) {
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
 		if(count($temp)>1) {
@@ -116,7 +117,7 @@ class BracketTable extends BracketConfig {
 		}
 		return $temp[0]->$column;
 	}
-	
+
 	public function where($column, $operator, $value) {
 		foreach($this->arr as $row) {
 			switch($operator) {
@@ -149,7 +150,7 @@ class BracketTable extends BracketConfig {
 		$this->temp = $arr;
 		return $this;
 	}
-	
+
 	public function andWhere($column, $operator, $value) {
 		$arr = array();
 		foreach($this->temp as $row) {
@@ -183,7 +184,7 @@ class BracketTable extends BracketConfig {
 		$this->temp = $arr;
 		return $this;
 	}
-	
+
 	public function insert($data) {
 		if(count($data) != count($data, COUNT_RECURSIVE)) {
 			for($i=0;$i<count($data);$i++) {
@@ -195,8 +196,8 @@ class BracketTable extends BracketConfig {
 		self::save();
 		return $this;
 	}
-	
-	public function insertAutoId($data) {	
+
+	public function insertAutoId($data) {
 		if(count($data) != count($data, COUNT_RECURSIVE)) {
 			$max = 1;
 			foreach($this->arr as $row) {
@@ -207,7 +208,7 @@ class BracketTable extends BracketConfig {
 			for($i=0;$i<count($data);$i++) {
 				$idarr = array('id' => $max+$i+1);
 				$data[$i] = array_merge($idarr, $data[$i]);
-					
+
 				array_push($this->arr, $data[$i]);
 			}
 		} else {
@@ -224,11 +225,11 @@ class BracketTable extends BracketConfig {
 		self::save();
 		return $this;
 	}
-	
+
 	public function orderBy($column, $type) {
 		$c = array();
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
-		
+
 		for($i=0;$i<count($temp)-1;$i++) {
 			for($j=0;$j<count($temp)-1;$j++) {
 				if($type=='desc') {
@@ -246,14 +247,14 @@ class BracketTable extends BracketConfig {
 				}
 			}
 		}
-		$this->temp = $temp;		
+		$this->temp = $temp;
 		return $this;
 	}
-	
+
 	public function reorder($column) {
 		$c = array();
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
-		
+
 		for($i=0;$i<count($this->arr)-1;$i++) {
 			for($j=0;$j<count($this->arr)-1;$j++) {
 				if($temp[$j]->$column > $temp[$j+1]->$column) {
@@ -268,7 +269,7 @@ class BracketTable extends BracketConfig {
 		self::__construct($this->name);
 		return $this;
 	}
-	
+
 	public function structure() {
 		$temp = array_shift($this->arr);
 		$a = array();
@@ -277,21 +278,26 @@ class BracketTable extends BracketConfig {
 		}
 		return $a;
 	}
-	
+
 	public function limit($i) {
 		$temp = empty($this->temp) ? $this->arr : $this->temp;
 		$this->temp = array_slice($temp, 0, $i);
 		return $this;
 	}
-	
+
 	public function save() {
 		$json = json_encode($this->arr, JSON_PRETTY_PRINT);
 		file_put_contents($this->fullpath, $json);
 	}
-	
+
 	public function delete() {
 		foreach($this->temp as $key=>$value) {
-			unset($this->arr[$key]);
+      			foreach($this->arr as $key1=>$value1) {
+        			if($value==$value1)
+          			{
+              				unset($this->arr[$key1]);
+        			}
+      			}
 			$this->arr = array_values($this->arr);
 		}
 		self::save();
@@ -305,25 +311,25 @@ class BracketDB extends BracketConfig {
 		$self = new BracketTable($name);
 		return $self;
 	}
-	
+
 	public static function create($name) {
 		$data = json_encode(array());
 		if(!file_exists(dirname(__FILE__).parent::$path.$name.parent::$ext)) {
 			file_put_contents(dirname(__FILE__).parent::$path.$name.parent::$ext, $data);
 		}
 	}
-	
+
 	public static function trash($name) {
 		if(file_exists(dirname(__FILE__).parent::$path.$name.parent::$ext) && !file_exists(dirname(__FILE__)."/trash")) {
 			mkdir(dirname(__FILE__)."/trash", 0777, true);
 		}
 		rename(dirname(__FILE__).parent::$path.$name.parent::$ext, dirname(__FILE__)."/trash/".$name);
 	}
-	
+
 	public static function restore($name) {
 		rename(dirname(__FILE__)."/trash/".$name, dirname(__FILE__).parent::$path.$name.parent::$ext);
 	}
-	
+
 	public static function delete($name) {
 		unlink(dirname(__FILE__).parent::$path.$name.parent::$ext);
 	}
