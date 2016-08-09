@@ -1,6 +1,10 @@
 <?php
 use Bracket\BracketDB as DB;
 include('bracketdb/Bracket.php');
+
+$table = DB::table('users');
+$table->where('id', '=',  '1')->first()->name="New name";
+$table->save();
 ?>
 <html>
 <head>
