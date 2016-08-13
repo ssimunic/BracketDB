@@ -145,5 +145,12 @@ Example:
 DB::table('users')->reorder('name');
 ```
 
-More comming soon!
+##### Edit
+```php
+$table = DB::table('users');
+$table->where('id', '=',  '1')->first()->name="New name";
+$table->save();
+```
+
+Documentation not fully done yet.
 -------
