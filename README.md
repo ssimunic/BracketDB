@@ -1,6 +1,6 @@
 Bracket
 =======
-JSON database using ORM for PHP prototyping
+Database using .json files for prototyping
 
 Requirements
 -------
